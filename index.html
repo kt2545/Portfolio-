@@ -14,15 +14,21 @@
         <div class="container">
             <nav>
                <h2>KapiL</h2>
-                <ul id="sidemenu">
-                    <li><a href="#header">Home</a></li>
-                    <li><a href="#about">About</a></li>
-                    <li><a href="#services">Services</a></li>
-                    <li><a href="#portfolio">Portfolio</a></li>
-                    <li><a href="#contact">Contact</a></li>
-                    <i class="fas fa-times" onclick="closemenu()"></i> <!---formblsupport -->
-                </ul>
-                <i class="fas fa-bars" onclick="openmenu()"></i> <!----mblsuppport -->
+                <div style="display:flex; align-items:center; gap:16px;">
+                    <ul id="sidemenu">
+                        <li><a href="#header">Home</a></li>
+                        <li><a href="#about">About</a></li>
+                        <li><a href="#services">Services</a></li>
+                        <li><a href="#portfolio">Portfolio</a></li>
+                        <li><a href="business.html">Business</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                        <i class="fas fa-times" onclick="closemenu()"></i> <!---formblsupport -->
+                    </ul>
+                    <button class="theme-switch-btn" id="theme-toggle-btn" onclick="toggleTheme()" title="Switch to Light Mode">
+                        <i class="fas fa-sun" id="theme-icon"></i>
+                    </button>
+                    <i class="fas fa-bars" onclick="openmenu()"></i> <!----mblsuppport -->
+                </div>
             </nav>
             <div class="header-text">
                 <p>Front-End Developer</p>
@@ -136,15 +142,14 @@
                 <div class="work">
                     <img src="images/work-3.png">
                     <div class="layer">
-                        <h3>Online shopping app</h3>
-                        <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Necessitatibus maxime fugit
-                            accusantium expedita ab sit, atque, commodi nemo perferendis quod ipsam illum. Perspiciatis
+                        <h3>Aone Gandaki Fresh House</h3>
+                        <p>Specialized Meat, Poultry & Egg ERP Management Suite with Purchases, Sales Billing, Expense Tracker & Profit/Loss Statement.
                         </p>
-                        <a href="#"><i class="fas fa-external-link-alt"></i></a>
+                        <a href="business.html"><i class="fas fa-external-link-alt"></i></a>
                     </div>
                 </div>
             </div>
-            <a href="#" class="btn">See more</a>
+            <a href="business.html" class="btn">Launch Business Suite</a>
         </div>
     </div>
     <!-- ----------------------------contact------------------------ -->
@@ -217,10 +222,36 @@
             sidemenu.style.right = "-200px";
         }
 
+        // Theme management
+        const THEME_KEY = 'meat_shop_theme';
+        function initTheme() {
+            const savedTheme = localStorage.getItem(THEME_KEY) || 'dark';
+            applyTheme(savedTheme);
+        }
 
+        function applyTheme(theme) {
+            if (theme === 'light') {
+                document.documentElement.setAttribute('data-theme', 'light');
+                const icon = document.getElementById('theme-icon');
+                const text = document.getElementById('theme-text');
+                if (icon) icon.className = 'fas fa-moon';
+                if (text) text.innerText = 'Dark Mode';
+            } else {
+                document.documentElement.removeAttribute('data-theme');
+                const icon = document.getElementById('theme-icon');
+                const text = document.getElementById('theme-text');
+                if (icon) icon.className = 'fas fa-sun';
+                if (text) text.innerText = 'Light Mode';
+            }
+            localStorage.setItem(THEME_KEY, theme);
+        }
 
+        function toggleTheme() {
+            const isLight = document.documentElement.getAttribute('data-theme') === 'light';
+            applyTheme(isLight ? 'dark' : 'light');
+        }
 
-
+        document.addEventListener('DOMContentLoaded', initTheme);
     </script>
 </body>
 

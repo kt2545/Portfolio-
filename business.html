@@ -1,0 +1,1063 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aone Gandaki Fresh House | Butchery, Poultry & P&L Suite</title>
+    <link rel="stylesheet" href="business.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+
+<body>
+    <!-- Site Navigation Header -->
+    <header class="site-header">
+        <div class="container">
+            <nav>
+                <a href="index.html" class="nav-brand">
+                    <div class="brand-logo" title="Aone Gandaki Fresh House">
+                        <i class="fas fa-drumstick-bite"></i>
+                    </div>
+                    <div>
+                        <div class="brand-title">Aone Gandaki <span>Fresh House</span></div>
+                        <div class="brand-sub"><i class="fas fa-certificate" style="color:var(--accent-amber); font-size:10px;"></i> Premium Meat, Poultry & Egg Craft</div>
+                    </div>
+                </a>
+
+                <div class="nav-right-actions">
+                    <ul id="sidemenu">
+                        <li><a href="index.html#header">Home</a></li>
+                        <li><a href="index.html#about">About</a></li>
+                        <li><a href="index.html#services">Services</a></li>
+                        <li><a href="index.html#portfolio">Portfolio</a></li>
+                        <li><a href="business.html" class="active">Business Suite</a></li>
+                        <li><a href="index.html#contact">Contact</a></li>
+                        <i class="fas fa-times close-menu-icon" onclick="closemenu()"></i>
+                    </ul>
+
+                    <!-- Light / Dark Mode Switch (Top Right Corner, Icon-Only) -->
+                    <button class="theme-switch-btn" id="theme-toggle-btn" onclick="toggleTheme()" title="Switch to Light Mode">
+                        <i class="fas fa-sun" id="theme-icon"></i>
+                    </button>
+
+                    <i class="fas fa-bars mobile-icon" onclick="openmenu()"></i>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Business Section Sub-Navigation Tabs -->
+    <div class="section-nav-wrapper">
+        <div class="container">
+            <div class="section-nav-tabs">
+                <button class="section-nav-tab tab-inventory active" onclick="switchSection('inventory')">
+                    <i class="fas fa-boxes-stacked"></i> <span>Inventory Stock</span>
+                </button>
+                <button class="section-nav-tab tab-purchases" onclick="switchSection('purchases')">
+                    <i class="fas fa-truck-loading"></i> <span>Purchases</span>
+                </button>
+                <button class="section-nav-tab tab-sales" onclick="switchSection('sales')">
+                    <i class="fas fa-cash-register"></i> <span>Sales & Billing</span>
+                </button>
+                <button class="section-nav-tab tab-expenses" onclick="switchSection('expenses')">
+                    <i class="fas fa-receipt"></i> <span>Expenses</span>
+                </button>
+                <button class="section-nav-tab tab-pnl" onclick="switchSection('pnl')">
+                    <i class="fas fa-chart-line"></i> <span>Profit & Loss (P&L)</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Content Area -->
+    <main class="container" style="flex: 1; padding-bottom: 40px;">
+
+        <!-- ========================================== -->
+        <!-- 1. INVENTORY SECTION PANE -->
+        <!-- ========================================== -->
+        <section id="pane-inventory" class="business-section-pane active">
+            <!-- Hero Header -->
+            <div class="hero-section">
+                <div class="hero-wrapper">
+                    <div class="hero-title-area">
+                        <div class="badge-pill">
+                            <i class="fas fa-drumstick-bite"></i> Aone Gandaki Fresh House
+                        </div>
+                        <h1>Stock & <span>Inventory</span> Hub</h1>
+                        <p>Real-time stock catalog for Chicken & Parts, Mutton, Chicken Eggs, and Chicken Sausages with CP, SP, and profit margins.</p>
+                    </div>
+                    <div class="hero-actions">
+                        <button class="btn-prime" onclick="openAddModal()">
+                            <i class="fas fa-plus-circle"></i> Add Meat Item
+                        </button>
+                        <button class="btn-secondary" onclick="exportToCSV()">
+                            <i class="fas fa-file-export"></i> Export CSV
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- KPI Grid -->
+            <div class="kpi-grid">
+                <div class="kpi-card kpi-total">
+                    <div class="kpi-header">
+                        <span class="kpi-label">TOTAL STOCK ON HAND</span>
+                        <div class="kpi-icon"><i class="fas fa-weight-hanging"></i></div>
+                    </div>
+                    <div class="kpi-value-text" id="kpi-total-stock">0 kg</div>
+                    <div class="kpi-footer">
+                        <span class="trend-up"><i class="fas fa-boxes"></i> Active Catalog</span>
+                        <span id="kpi-total-items">0 Items</span>
+                    </div>
+                </div>
+
+                <div class="kpi-card kpi-cost">
+                    <div class="kpi-header">
+                        <span class="kpi-label">STOCK COST VALUE (CP)</span>
+                        <div class="kpi-icon"><i class="fas fa-hand-holding-usd"></i></div>
+                    </div>
+                    <div class="kpi-value-text" id="kpi-total-cost" style="color:var(--accent-blue);">Rs. 0</div>
+                    <div class="kpi-footer">
+                        <span>Total Investment</span>
+                        <span>At Purchase Rate</span>
+                    </div>
+                </div>
+
+                <div class="kpi-card kpi-value">
+                    <div class="kpi-header">
+                        <span class="kpi-label">RETAIL VALUE (SP)</span>
+                        <div class="kpi-icon"><i class="fas fa-store"></i></div>
+                    </div>
+                    <div class="kpi-value-text" id="kpi-total-val" style="color:var(--accent-amber);">Rs. 0</div>
+                    <div class="kpi-footer">
+                        <span>Gross Potential</span>
+                        <span>At Selling Rate</span>
+                    </div>
+                </div>
+
+                <div class="kpi-card kpi-profit">
+                    <div class="kpi-header">
+                        <span class="kpi-label">PROJECTED STOCK PROFIT</span>
+                        <div class="kpi-icon"><i class="fas fa-chart-pie"></i></div>
+                    </div>
+                    <div class="kpi-value-text" id="kpi-total-profit" style="color:var(--accent-emerald);">Rs. 0</div>
+                    <div class="kpi-footer">
+                        <span id="kpi-margin-trend" class="trend-up"><i class="fas fa-percentage"></i> 0% Margin</span>
+                        <span id="kpi-profit-status" style="font-weight:600;">Profitable</span>
+                    </div>
+                </div>
+
+                <div class="kpi-card kpi-alert">
+                    <div class="kpi-header">
+                        <span class="kpi-label">LOW STOCK ALERTS</span>
+                        <div class="kpi-icon"><i class="fas fa-exclamation-triangle"></i></div>
+                    </div>
+                    <div class="kpi-value-text" id="kpi-low-stock" style="color:var(--accent-rose);">0</div>
+                    <div class="kpi-footer">
+                        <span class="trend-down">Items below min qty</span>
+                        <span>Reorder needed</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Controls & Table -->
+            <div class="section-panel">
+                <div class="controls-bar">
+                    <div class="category-tabs">
+                        <button class="category-tab active" data-category="all">
+                            <i class="fas fa-th-large"></i> All Products
+                        </button>
+                        <button class="category-tab" data-category="chicken">
+                            <i class="fas fa-drumstick-bite"></i> Chicken
+                        </button>
+                        <button class="category-tab" data-category="mutton">
+                            <i class="fas fa-bone"></i> Mutton
+                        </button>
+                        <button class="category-tab" data-category="egg">
+                            <i class="fas fa-egg"></i> Eggs
+                        </button>
+                        <button class="category-tab" data-category="sausage">
+                            <i class="fas fa-hotdog"></i> Sausage
+                        </button>
+                    </div>
+
+                    <div class="filter-inputs-row">
+                        <div class="search-box">
+                            <i class="fas fa-search"></i>
+                            <input type="text" id="search-input" placeholder="Search chicken, mutton cuts, eggs, sausages...">
+                        </div>
+                        <div class="select-box">
+                            <select id="status-filter">
+                                <option value="all">All Statuses</option>
+                                <option value="in_stock">In Stock Only</option>
+                                <option value="low_stock">Low Stock Warning</option>
+                                <option value="out_stock">Out of Stock</option>
+                            </select>
+                        </div>
+                        <div class="select-box">
+                            <select id="sort-filter">
+                                <option value="name-asc">Sort: Name (A-Z)</option>
+                                <option value="profit-desc">Sort: Profit Margin (High to Low)</option>
+                                <option value="profit-asc">Sort: Profit Margin (Low to High)</option>
+                                <option value="qty-desc">Sort: Stock Qty (High to Low)</option>
+                                <option value="qty-asc">Sort: Stock Qty (Low to High)</option>
+                                <option value="price-desc">Sort: Selling Price (High to Low)</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Table View -->
+                <div id="table-view-wrapper" class="table-responsive">
+                    <table class="meat-table">
+                        <thead>
+                            <tr>
+                                <th>Product Name</th>
+                                <th>Category</th>
+                                <th>Stock On Hand</th>
+                                <th>Cost Price (CP)</th>
+                                <th>Selling Price (SP)</th>
+                                <th>Status</th>
+                                <th style="text-align: center;">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="meat-table-body">
+                            <!-- Injected by JavaScript -->
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- Bottom Financial Summary Card -->
+                <div class="financial-summary-card" id="table-financial-summary">
+                    <div class="financial-stat-group">
+                        <div class="fin-stat-item">
+                            <span class="fin-label">Items Listed</span>
+                            <span class="fin-value" id="sum-items-count">0 items</span>
+                        </div>
+                        <div class="fin-stat-item">
+                            <span class="fin-label">Total Stock Weight/Qty</span>
+                            <span class="fin-value" id="sum-stock-total">0 kg</span>
+                        </div>
+                        <div class="fin-stat-item">
+                            <span class="fin-label">Total Cost Investment (CP)</span>
+                            <span class="fin-value" id="sum-cost-total" style="color:var(--accent-blue);">Rs. 0</span>
+                        </div>
+                        <div class="fin-stat-item">
+                            <span class="fin-label">Total Retail Revenue (SP)</span>
+                            <span class="fin-value" id="sum-retail-total" style="color:var(--accent-amber);">Rs. 0</span>
+                        </div>
+                    </div>
+                    <div class="financial-stat-group">
+                        <div class="fin-stat-item profit-highlight">
+                            <span class="fin-label">Net Projected Profit & Margin</span>
+                            <span class="fin-value" id="sum-profit-total">+Rs. 0 (+0%)</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Empty State -->
+                <div id="empty-state" class="empty-state" style="display: none;">
+                    <i class="fas fa-drumstick-bite"></i>
+                    <h3>No items found</h3>
+                    <p>Try adjusting your search criteria or category filter.</p>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- ========================================== -->
+        <!-- 2. PURCHASES & RESTOCK SECTION PANE -->
+        <!-- ========================================== -->
+        <section id="pane-purchases" class="business-section-pane">
+            <div class="hero-section">
+                <div class="hero-wrapper">
+                    <div class="hero-title-area">
+                        <div class="badge-pill" style="background:rgba(59,130,246,0.15); color:var(--accent-blue); border-color:rgba(59,130,246,0.3);">
+                            <i class="fas fa-truck-loading"></i> Inward Restock Management
+                        </div>
+                        <h1>Meat & Poultry <span>Purchases</span></h1>
+                        <p>Record inward purchases from local poultry farms, livestock suppliers, and cold chain distributors. Keeps inventory and CP cost updated automatically.</p>
+                    </div>
+                    <div class="hero-actions">
+                        <button class="btn-prime" style="background:var(--accent-blue); box-shadow:0 4px 15px rgba(59,130,246,0.35);" onclick="openPurchaseModal()">
+                            <i class="fas fa-plus-circle"></i> + Record New Purchase
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Purchases KPI Grid -->
+            <div class="kpi-grid">
+                <div class="kpi-card kpi-cost">
+                    <div class="kpi-header">
+                        <span class="kpi-label">TOTAL PURCHASES AMOUNT</span>
+                        <div class="kpi-icon"><i class="fas fa-shopping-basket"></i></div>
+                    </div>
+                    <div class="kpi-value-text" id="kpi-purchases-total">Rs. 0</div>
+                    <div class="kpi-footer">
+                        <span>All recorded purchases</span>
+                        <span id="kpi-purchases-count">0 Invoices</span>
+                    </div>
+                </div>
+
+                <div class="kpi-card kpi-total">
+                    <div class="kpi-header">
+                        <span class="kpi-label">PURCHASES TODAY</span>
+                        <div class="kpi-icon"><i class="fas fa-calendar-day"></i></div>
+                    </div>
+                    <div class="kpi-value-text" id="kpi-purchases-today">Rs. 0</div>
+                    <div class="kpi-footer">
+                        <span>Today's inward bills</span>
+                        <span>Updated live</span>
+                    </div>
+                </div>
+
+                <div class="kpi-card kpi-value">
+                    <div class="kpi-header">
+                        <span class="kpi-label">TOTAL VOLUME PURCHASED</span>
+                        <div class="kpi-icon"><i class="fas fa-weight"></i></div>
+                    </div>
+                    <div class="kpi-value-text" id="kpi-purchases-volume">0 kg</div>
+                    <div class="kpi-footer">
+                        <span>Poultry, Mutton, Eggs & Sausages</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Purchases Table Panel -->
+            <div class="section-panel">
+                <div class="section-panel-header">
+                    <h2><i class="fas fa-list-alt" style="color:var(--accent-blue);"></i> Purchase Ledger & Stock Inward</h2>
+                    <div class="search-box" style="max-width: 320px;">
+                        <i class="fas fa-search"></i>
+                        <input type="text" id="search-purchase-input" placeholder="Search supplier, item...">
+                    </div>
+                </div>
+
+                <div class="table-responsive">
+                    <table class="meat-table">
+                        <thead>
+                            <tr>
+                                <th>Date</th>
+                                <th>Product Item</th>
+                                <th>Category</th>
+                                <th>Qty Purchased</th>
+                                <th>Rate (CP)</th>
+                                <th>Total Cost (NPR)</th>
+                                <th>Supplier Name</th>
+                            </tr>
+                        </thead>
+                        <tbody id="purchases-table-body">
+                            <!-- Injected by JS -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- ========================================== -->
+        <!-- 3. SALES & BILLING SECTION PANE -->
+        <!-- ========================================== -->
+        <section id="pane-sales" class="business-section-pane">
+            <div class="hero-section">
+                <div class="hero-wrapper">
+                    <div class="hero-title-area">
+                        <div class="badge-pill" style="background:rgba(16,185,129,0.15); color:var(--accent-emerald); border-color:rgba(16,185,129,0.3);">
+                            <i class="fas fa-cash-register"></i> Point of Sale & Billing
+                        </div>
+                        <h1>Customer <span>Sales & Invoices</span></h1>
+                        <p>Generate customer bills, deduct stock automatically, and compute instant profit margin per sale.</p>
+                    </div>
+                    <div class="hero-actions">
+                        <button class="btn-success" onclick="openSaleModal()">
+                            <i class="fas fa-plus-circle"></i> + New Customer Sale / Bill
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Sales KPI Grid -->
+            <div class="kpi-grid">
+                <div class="kpi-card kpi-profit">
+                    <div class="kpi-header">
+                        <span class="kpi-label">TOTAL SALES REVENUE</span>
+                        <div class="kpi-icon"><i class="fas fa-coins"></i></div>
+                    </div>
+                    <div class="kpi-value-text" id="kpi-sales-revenue">Rs. 0</div>
+                    <div class="kpi-footer">
+                        <span class="trend-up"><i class="fas fa-receipt"></i> Total Bills</span>
+                        <span id="kpi-sales-count">0 Sales</span>
+                    </div>
+                </div>
+
+                <div class="kpi-card kpi-value">
+                    <div class="kpi-header">
+                        <span class="kpi-label">REALIZED GROSS PROFIT</span>
+                        <div class="kpi-icon"><i class="fas fa-hand-holding-dollar"></i></div>
+                    </div>
+                    <div class="kpi-value-text" id="kpi-sales-profit" style="color:var(--accent-emerald);">Rs. 0</div>
+                    <div class="kpi-footer">
+                        <span id="kpi-sales-margin" class="trend-up">0% Profit Margin</span>
+                        <span>(Sales SP - Cost CP)</span>
+                    </div>
+                </div>
+
+                <div class="kpi-card kpi-total">
+                    <div class="kpi-header">
+                        <span class="kpi-label">SALES TODAY</span>
+                        <div class="kpi-icon"><i class="fas fa-calendar-check"></i></div>
+                    </div>
+                    <div class="kpi-value-text" id="kpi-sales-today">Rs. 0</div>
+                    <div class="kpi-footer">
+                        <span>Today's counter collection</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Sales Table Panel -->
+            <div class="section-panel">
+                <div class="section-panel-header">
+                    <h2><i class="fas fa-receipt" style="color:var(--accent-emerald);"></i> Sales Register & Customer Records</h2>
+                    <div class="search-box" style="max-width: 320px;">
+                        <i class="fas fa-search"></i>
+                        <input type="text" id="search-sales-input" placeholder="Search customer, item...">
+                    </div>
+                </div>
+
+                <div class="table-responsive">
+                    <table class="meat-table">
+                        <thead>
+                            <tr>
+                                <th>Date & Time</th>
+                                <th>Product Item</th>
+                                <th>Qty Sold</th>
+                                <th>Rate (SP)</th>
+                                <th>Total Amount (NPR)</th>
+                                <th>Realized Profit</th>
+                                <th>Customer</th>
+                            </tr>
+                        </thead>
+                        <tbody id="sales-table-body">
+                            <!-- Injected by JS -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- ========================================== -->
+        <!-- 4. EXPENSES SECTION PANE -->
+        <!-- ========================================== -->
+        <section id="pane-expenses" class="business-section-pane">
+            <div class="hero-section">
+                <div class="hero-wrapper">
+                    <div class="hero-title-area">
+                        <div class="badge-pill" style="background:rgba(217,119,6,0.15); color:var(--accent-amber); border-color:rgba(217,119,6,0.3);">
+                            <i class="fas fa-money-bill-wave"></i> Shop Overhead & Operations
+                        </div>
+                        <h1>Store <span>Expenses Tracker</span></h1>
+                        <p>Track operating costs such as shop rent, electricity for deep freezers, staff wages, delivery fuel, ice blocks, and packaging materials.</p>
+                    </div>
+                    <div class="hero-actions">
+                        <button class="btn-prime" style="background:var(--accent-amber); box-shadow:0 4px 15px rgba(217,119,6,0.35);" onclick="openExpenseModal()">
+                            <i class="fas fa-plus-circle"></i> + Record Store Expense
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Expenses KPI Grid -->
+            <div class="kpi-grid">
+                <div class="kpi-card kpi-alert">
+                    <div class="kpi-header">
+                        <span class="kpi-label">TOTAL EXPENSES</span>
+                        <div class="kpi-icon"><i class="fas fa-file-invoice-dollar"></i></div>
+                    </div>
+                    <div class="kpi-value-text" id="kpi-expenses-total" style="color:var(--accent-rose);">Rs. 0</div>
+                    <div class="kpi-footer">
+                        <span>All recorded expenses</span>
+                        <span id="kpi-expenses-count">0 Vouchers</span>
+                    </div>
+                </div>
+
+                <div class="kpi-card kpi-value">
+                    <div class="kpi-header">
+                        <span class="kpi-label">THIS MONTH'S EXPENSES</span>
+                        <div class="kpi-icon"><i class="fas fa-calendar-alt"></i></div>
+                    </div>
+                    <div class="kpi-value-text" id="kpi-expenses-month">Rs. 0</div>
+                    <div class="kpi-footer">
+                        <span>Rent, Power, Wages</span>
+                    </div>
+                </div>
+
+                <div class="kpi-card kpi-purple">
+                    <div class="kpi-header">
+                        <span class="kpi-label">TOP EXPENSE CATEGORY</span>
+                        <div class="kpi-icon"><i class="fas fa-bolt"></i></div>
+                    </div>
+                    <div class="kpi-value-text" id="kpi-top-expense" style="font-size:18px;">Rent & Power</div>
+                    <div class="kpi-footer">
+                        <span>Largest overhead</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Expenses Table Panel -->
+            <div class="section-panel">
+                <div class="section-panel-header">
+                    <h2><i class="fas fa-receipt" style="color:var(--accent-amber);"></i> Expenses Ledger & Operating Costs</h2>
+                    <div class="search-box" style="max-width: 320px;">
+                        <i class="fas fa-search"></i>
+                        <input type="text" id="search-expense-input" placeholder="Search expense category, vendor...">
+                    </div>
+                </div>
+
+                <div class="table-responsive">
+                    <table class="meat-table">
+                        <thead>
+                            <tr>
+                                <th>Date</th>
+                                <th>Expense Category</th>
+                                <th>Description / Remarks</th>
+                                <th>Paid To (Vendor)</th>
+                                <th style="text-align:right;">Amount (NPR)</th>
+                            </tr>
+                        </thead>
+                        <tbody id="expenses-table-body">
+                            <!-- Injected by JS -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- ========================================== -->
+        <!-- 5. PROFIT & LOSS (P&L) STATEMENT PANE -->
+        <!-- ========================================== -->
+        <section id="pane-pnl" class="business-section-pane">
+            <div class="hero-section">
+                <div class="hero-wrapper">
+                    <div class="hero-title-area">
+                        <div class="badge-pill" style="background:rgba(139,92,246,0.15); color:var(--accent-purple); border-color:rgba(139,92,246,0.3);">
+                            <i class="fas fa-balance-scale"></i> Income & Expense Financial Statement
+                        </div>
+                        <h1>Profit & Loss <span>(P&L) Statement</span></h1>
+                        <p>Complete financial breakdown: Sales Revenue, Cost of Goods Sold (COGS), Gross Profit, Operating Expenses, and Final Net Profit.</p>
+                    </div>
+                    <div class="hero-actions">
+                        <button class="btn-purple" onclick="window.print()">
+                            <i class="fas fa-print"></i> Print P&L Report
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- High-Level Financial Performance Cards -->
+            <div class="kpi-grid">
+                <div class="kpi-card kpi-total">
+                    <div class="kpi-header">
+                        <span class="kpi-label">TOTAL SALES REVENUE</span>
+                        <div class="kpi-icon"><i class="fas fa-arrow-trend-up"></i></div>
+                    </div>
+                    <div class="kpi-value-text" id="pnl-kpi-sales">Rs. 0</div>
+                    <div class="kpi-footer">
+                        <span>Total Customer Inflow</span>
+                    </div>
+                </div>
+
+                <div class="kpi-card kpi-cost">
+                    <div class="kpi-header">
+                        <span class="kpi-label">COST OF GOODS SOLD (COGS)</span>
+                        <div class="kpi-icon"><i class="fas fa-boxes-packing"></i></div>
+                    </div>
+                    <div class="kpi-value-text" id="pnl-kpi-cogs" style="color:var(--accent-blue);">Rs. 0</div>
+                    <div class="kpi-footer">
+                        <span>Purchase Cost of Sold Meat</span>
+                    </div>
+                </div>
+
+                <div class="kpi-card kpi-profit">
+                    <div class="kpi-header">
+                        <span class="kpi-label">GROSS PROFIT</span>
+                        <div class="kpi-icon"><i class="fas fa-chart-pie"></i></div>
+                    </div>
+                    <div class="kpi-value-text" id="pnl-kpi-gross-profit" style="color:var(--accent-emerald);">Rs. 0</div>
+                    <div class="kpi-footer">
+                        <span id="pnl-kpi-gross-margin">0% Gross Margin</span>
+                    </div>
+                </div>
+
+                <div class="kpi-card kpi-alert">
+                    <div class="kpi-header">
+                        <span class="kpi-label">OPERATING EXPENSES</span>
+                        <div class="kpi-icon"><i class="fas fa-money-bill-transfer"></i></div>
+                    </div>
+                    <div class="kpi-value-text" id="pnl-kpi-expenses" style="color:var(--accent-rose);">Rs. 0</div>
+                    <div class="kpi-footer">
+                        <span>Rent, Power, Staff, Ice</span>
+                    </div>
+                </div>
+
+                <div class="kpi-card kpi-purple">
+                    <div class="kpi-header">
+                        <span class="kpi-label">NET PROFIT / LOSS</span>
+                        <div class="kpi-icon"><i class="fas fa-trophy"></i></div>
+                    </div>
+                    <div class="kpi-value-text" id="pnl-kpi-net-profit" style="color:var(--accent-purple);">Rs. 0</div>
+                    <div class="kpi-footer">
+                        <span id="pnl-kpi-net-margin" style="font-weight:700;">0% Net Margin</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Formal P&L Statement Sheet -->
+            <div class="pnl-statement-sheet" id="printable-pnl">
+                <div class="statement-title-bar">
+                    <h2>AONE GANDAKI FRESH HOUSE</h2>
+                    <p>Income & Expenditure Profit / Loss Statement</p>
+                    <p style="font-size:11px; color:var(--text-dim);">Kathmandu / Pokhara, Nepal &bull; Certified Fresh Poultry, Mutton & Egg Butchery</p>
+                </div>
+
+                <!-- 1. Revenue Block -->
+                <div class="pnl-section-block">
+                    <h3><i class="fas fa-plus-circle" style="color:var(--accent-emerald);"></i> 1. Operating Revenue (Sales Inflow)</h3>
+                    <div class="pnl-row sub-row">
+                        <span>Chicken Sales</span>
+                        <span id="pnl-sales-chicken">Rs. 0</span>
+                    </div>
+                    <div class="pnl-row sub-row">
+                        <span>Mutton Sales</span>
+                        <span id="pnl-sales-mutton">Rs. 0</span>
+                    </div>
+                    <div class="pnl-row sub-row">
+                        <span>Eggs Sales</span>
+                        <span id="pnl-sales-egg">Rs. 0</span>
+                    </div>
+                    <div class="pnl-row sub-row">
+                        <span>Sausage Sales</span>
+                        <span id="pnl-sales-sausage">Rs. 0</span>
+                    </div>
+                    <div class="pnl-row total-row">
+                        <span>TOTAL GROSS REVENUE (A)</span>
+                        <span id="pnl-total-revenue" style="color:var(--accent-emerald);">Rs. 0</span>
+                    </div>
+                </div>
+
+                <!-- 2. Cost of Sales Block -->
+                <div class="pnl-section-block">
+                    <h3><i class="fas fa-minus-circle" style="color:var(--accent-blue);"></i> 2. Cost of Goods Sold (COGS)</h3>
+                    <div class="pnl-row sub-row">
+                        <span>Cost of Chicken Sold</span>
+                        <span id="pnl-cogs-chicken">Rs. 0</span>
+                    </div>
+                    <div class="pnl-row sub-row">
+                        <span>Cost of Mutton Sold</span>
+                        <span id="pnl-cogs-mutton">Rs. 0</span>
+                    </div>
+                    <div class="pnl-row sub-row">
+                        <span>Cost of Eggs Sold</span>
+                        <span id="pnl-cogs-egg">Rs. 0</span>
+                    </div>
+                    <div class="pnl-row sub-row">
+                        <span>Cost of Sausage Sold</span>
+                        <span id="pnl-cogs-sausage">Rs. 0</span>
+                    </div>
+                    <div class="pnl-row total-row">
+                        <span>TOTAL COST OF GOODS SOLD (B)</span>
+                        <span id="pnl-total-cogs" style="color:var(--accent-blue);">Rs. 0</span>
+                    </div>
+                </div>
+
+                <!-- 3. Gross Profit Summary Block -->
+                <div class="pnl-section-block">
+                    <div class="pnl-row total-row" style="background:rgba(16,185,129,0.1); border-color:var(--accent-emerald); font-size:15px;">
+                        <span>GROSS OPERATING PROFIT (C = A - B)</span>
+                        <span id="pnl-statement-gross-profit" style="color:var(--accent-emerald);">Rs. 0 (0%)</span>
+                    </div>
+                </div>
+
+                <!-- 4. Operating Expenses Block -->
+                <div class="pnl-section-block">
+                    <h3><i class="fas fa-minus-circle" style="color:var(--accent-rose);"></i> 3. Operating Overhead & Store Expenses</h3>
+                    <div id="pnl-expenses-breakdown-list">
+                        <!-- Injected by JS -->
+                    </div>
+                    <div class="pnl-row total-row">
+                        <span>TOTAL STORE EXPENSES (D)</span>
+                        <span id="pnl-total-expenses" style="color:var(--accent-rose);">Rs. 0</span>
+                    </div>
+                </div>
+
+                <!-- 5. Final Net Profit Bottom Line -->
+                <div class="pnl-row final-net-row" id="pnl-statement-final-row">
+                    <span>FINAL NET PROFIT / LOSS (NET = C - D)</span>
+                    <span id="pnl-statement-net-profit">+Rs. 0 (+0.0%)</span>
+                </div>
+            </div>
+
+            <!-- Charts Section -->
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-top: 30px;">
+
+                <!-- Revenue vs COGS vs Expenses Bar Chart -->
+                <div style="background: var(--bg-card); border: 1px solid var(--border-color); border-radius: var(--radius-lg); padding: 22px; box-shadow: var(--shadow-card);">
+                    <h3 style="font-size:15px; font-weight:700; color:var(--text-main); margin-bottom:16px; display:flex; align-items:center; gap:8px;">
+                        <i class="fas fa-chart-bar" style="color:var(--accent-blue);"></i> Revenue vs Cost vs Expenses
+                    </h3>
+                    <canvas id="chart-revenue-bar" height="220"></canvas>
+                </div>
+
+                <!-- Category-wise Sales Donut -->
+                <div style="background: var(--bg-card); border: 1px solid var(--border-color); border-radius: var(--radius-lg); padding: 22px; box-shadow: var(--shadow-card);">
+                    <h3 style="font-size:15px; font-weight:700; color:var(--text-main); margin-bottom:16px; display:flex; align-items:center; gap:8px;">
+                        <i class="fas fa-chart-pie" style="color:var(--primary);"></i> Sales by Category
+                    </h3>
+                    <canvas id="chart-category-donut" height="220"></canvas>
+                </div>
+
+                <!-- Monthly Expenses Breakdown -->
+                <div style="background: var(--bg-card); border: 1px solid var(--border-color); border-radius: var(--radius-lg); padding: 22px; box-shadow: var(--shadow-card);">
+                    <h3 style="font-size:15px; font-weight:700; color:var(--text-main); margin-bottom:16px; display:flex; align-items:center; gap:8px;">
+                        <i class="fas fa-chart-pie" style="color:var(--accent-amber);"></i> Expenses Breakdown
+                    </h3>
+                    <canvas id="chart-expenses-donut" height="220"></canvas>
+                </div>
+
+                <!-- Gross Profit vs Net Profit Gauge-like bar -->
+                <div style="background: var(--bg-card); border: 1px solid var(--border-color); border-radius: var(--radius-lg); padding: 22px; box-shadow: var(--shadow-card);">
+                    <h3 style="font-size:15px; font-weight:700; color:var(--text-main); margin-bottom:16px; display:flex; align-items:center; gap:8px;">
+                        <i class="fas fa-chart-line" style="color:var(--accent-emerald);"></i> Gross vs Net Profit Analysis
+                    </h3>
+                    <canvas id="chart-profit-line" height="220"></canvas>
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="site-footer">
+        <div class="container">
+            <p><strong>Aone Gandaki Fresh House</strong> &bull; Kathmandu / Pokhara, Nepal &bull; Fresh Poultry & Quality Meat Craft</p>
+            <p style="font-size: 11px; margin-top: 4px; color: var(--text-dim);">Developed for Kapil Tiwari &bull; All Rights Reserved</p>
+        </div>
+    </footer>
+
+    <!-- ========================================== -->
+    <!-- MODALS -->
+    <!-- ========================================== -->
+
+    <!-- 1. Add / Edit Meat Item Modal -->
+    <div class="modal-overlay" id="meat-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="modal-stock-title"><i class="fas fa-drumstick-bite" style="color:var(--primary);"></i> Add Product / Meat Cut</h3>
+                <button class="modal-close" onclick="closeModal('meat-modal')">&times;</button>
+            </div>
+            <form id="meat-stock-form">
+                <div class="modal-body">
+                    <input type="hidden" id="form-item-id">
+                    <div class="modal-form-grid">
+                        <div class="form-group full-width">
+                            <label>Product / Cut Name *</label>
+                            <input type="text" id="form-name" list="dl-inventory-names" placeholder="e.g. Boneless Chicken Breast" required>
+                            <datalist id="dl-inventory-names"></datalist>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Category *</label>
+                            <input type="text" id="form-category" list="dl-categories" placeholder="e.g. Chicken, Mutton, Eggs, Sausage" required>
+                            <datalist id="dl-categories">
+                                <option value="Chicken"></option>
+                                <option value="Mutton"></option>
+                                <option value="Eggs"></option>
+                                <option value="Sausage"></option>
+                            </datalist>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Cut Specification / Description</label>
+                            <input type="text" id="form-cut" placeholder="e.g. Skinless Fillet / Diced Bone-in">
+                        </div>
+
+                        <div class="form-group">
+                            <label>Stock Quantity *</label>
+                            <input type="number" step="0.1" min="0" id="form-quantity" placeholder="0.0" oninput="updateModalProfitCalc()" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Measurement Unit *</label>
+                            <select id="form-unit" onchange="updateModalProfitCalc()">
+                                <option value="kg">kg (Kilograms)</option>
+                                <option value="packs">packs (Sealed)</option>
+                                <option value="crates">crates (30 eggs)</option>
+                                <option value="trays">trays (12 eggs)</option>
+                                <option value="pcs">pcs (Pieces)</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Cost Price (CP) / Unit (Rs.) *</label>
+                            <input type="number" step="1" min="0" id="form-cp" placeholder="e.g. 330" oninput="updateModalProfitCalc()" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Selling Price (SP) / Unit (Rs.) *</label>
+                            <input type="number" step="1" min="0" id="form-price" placeholder="e.g. 440" oninput="updateModalProfitCalc()" required>
+                        </div>
+
+                        <div class="form-group full-width">
+                            <!-- Live Profit Calculation Preview inside Modal -->
+                            <div class="profit-calc-card">
+                                <div class="profit-calc-item">
+                                    <span class="p-label">Unit Profit / Margin</span>
+                                    <span class="p-val" id="modal-calc-unit-profit">+Rs. 0 / kg</span>
+                                </div>
+                                <div class="profit-calc-item">
+                                    <span class="p-label">Margin %</span>
+                                    <span class="p-val" id="modal-calc-margin">+0.0%</span>
+                                </div>
+                                <div class="profit-calc-item">
+                                    <span class="p-label">Total Stock Profit</span>
+                                    <span class="p-val" id="modal-calc-total-profit">+Rs. 0</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Low Stock Alert Level</label>
+                            <input type="number" step="0.5" id="form-threshold" placeholder="e.g. 10">
+                        </div>
+
+                        <div class="form-group">
+                            <label>Supplier / Farm</label>
+                            <input type="text" id="form-supplier" list="dl-suppliers" placeholder="e.g. Valley Poultry Farm">
+                            <datalist id="dl-suppliers"></datalist>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn-ghost" onclick="closeModal('meat-modal')">Cancel</button>
+                    <button type="submit" class="btn-prime">Save Meat Product</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+
+    <!-- 2. Record Inward Purchase Modal -->
+    <div class="modal-overlay" id="purchase-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3><i class="fas fa-truck-loading" style="color:var(--accent-blue);"></i> Record Inward Purchase / Restock</h3>
+                <button class="modal-close" onclick="closeModal('purchase-modal')">&times;</button>
+            </div>
+            <form id="purchase-form">
+                <div class="modal-body">
+                    <div class="modal-form-grid">
+                        <div class="form-group full-width">
+                            <label>Product Item Name *</label>
+                            <input type="text" id="purchase-item-search" list="dl-purchase-items" placeholder="Type or choose product item name..." oninput="handlePurchaseSearchInput()" autocomplete="off" required>
+                            <input type="hidden" id="purchase-item-id">
+                            <datalist id="dl-purchase-items">
+                                <!-- Populated dynamically by JS -->
+                            </datalist>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Quantity Purchased *</label>
+                            <input type="number" step="0.1" min="0.1" id="purchase-qty" placeholder="10.0" oninput="calculatePurchaseTotal()" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Unit</label>
+                            <input type="text" id="purchase-unit" readonly>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Purchase Rate / Unit (CP in NPR) *</label>
+                            <input type="number" step="1" min="1" id="purchase-cp" placeholder="e.g. 330" oninput="calculatePurchaseTotal()" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Total Bill Amount</label>
+                            <div style="font-size:17px; font-weight:700; color:var(--accent-blue); padding-top:8px;" id="purchase-total-preview">Rs. 0</div>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Supplier / Farm Name *</label>
+                            <input type="text" id="purchase-supplier" list="dl-suppliers" placeholder="e.g. Valley Organic Farm" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Purchase Date</label>
+                            <input type="date" id="purchase-date" required>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn-ghost" onclick="closeModal('purchase-modal')">Cancel</button>
+                    <button type="submit" class="btn-prime" style="background:var(--accent-blue);">Save Purchase & Update Stock</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+
+    <!-- 3. Record Customer Sale Modal -->
+    <div class="modal-overlay" id="sale-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3><i class="fas fa-cash-register" style="color:var(--accent-emerald);"></i> Record Customer Sale</h3>
+                <button class="modal-close" onclick="closeModal('sale-modal')">&times;</button>
+            </div>
+            <form id="record-sale-form">
+                <div class="modal-body">
+                    <div class="modal-form-grid">
+                        <div class="form-group full-width">
+                            <label>Product Item Name *</label>
+                            <input type="text" id="sale-item-search" list="dl-sale-items" placeholder="Type or choose product item to sell..." oninput="handleSaleSearchInput()" autocomplete="off" required>
+                            <input type="hidden" id="sale-item-id">
+                            <datalist id="dl-sale-items">
+                                <!-- Populated dynamically by JS -->
+                            </datalist>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Available Stock</label>
+                            <div style="font-size: 14px; font-weight: 700; color: var(--text-main); padding-top:6px;" id="sale-stock-avail">0 kg</div>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Quantity to Sell *</label>
+                            <input type="number" id="sale-amount" step="0.1" min="0.1" value="1" oninput="calculateSaleTotal()" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Selling Rate (SP in NPR) *</label>
+                            <input type="number" id="sale-rate" step="1" min="1" oninput="calculateSaleTotal()" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Cost Price (CP) for P&L</label>
+                            <div style="font-size: 13px; color: var(--accent-blue); padding-top:6px;" id="sale-cp-display">Rs. 0 / kg</div>
+                        </div>
+
+                        <!-- Live Sale Calculation Preview -->
+                        <div class="form-group full-width">
+                            <div class="profit-calc-card">
+                                <div class="profit-calc-item">
+                                    <span class="p-label">Total Amount</span>
+                                    <span class="p-val" id="sale-total-calc" style="font-size:16px;">Rs. 0</span>
+                                </div>
+                                <div class="profit-calc-item">
+                                    <span class="p-label">Realized Profit</span>
+                                    <span class="p-val" id="sale-profit-calc" style="font-size:16px; color:var(--accent-emerald);">+Rs. 0</span>
+                                </div>
+                                <div class="profit-calc-item">
+                                    <span class="p-label">Profit Margin</span>
+                                    <span class="p-val" id="sale-margin-calc">+0.0%</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group full-width">
+                            <label>Customer Name</label>
+                            <input type="text" id="sale-customer" placeholder="e.g. Walk-in Customer">
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn-ghost" onclick="closeModal('sale-modal')">Cancel</button>
+                    <button type="submit" class="btn-success">Save Sale & Update Stock</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+
+    <!-- 4. Record Store Expense Modal -->
+    <div class="modal-overlay" id="expense-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3><i class="fas fa-receipt" style="color:var(--accent-amber);"></i> Record Store Expense Voucher</h3>
+                <button class="modal-close" onclick="closeModal('expense-modal')">&times;</button>
+            </div>
+            <form id="expense-form">
+                <div class="modal-body">
+                    <div class="modal-form-grid">
+                        <div class="form-group full-width">
+                            <label>Expense Category *</label>
+                            <input type="text" id="expense-category" list="dl-expense-categories" placeholder="Type or select expense category..." autocomplete="off" required>
+                            <datalist id="dl-expense-categories">
+                                <option value="Shop Rent"></option>
+                                <option value="Electricity & Freezers"></option>
+                                <option value="Staff Salaries & Wages"></option>
+                                <option value="Ice & Packaging"></option>
+                                <option value="Vehicle & Delivery Fuel"></option>
+                                <option value="Maintenance & Cleaning"></option>
+                                <option value="Miscellaneous"></option>
+                            </datalist>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Expense Amount (NPR) *</label>
+                            <input type="number" step="1" min="1" id="expense-amount" placeholder="e.g. 1500" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Paid To / Vendor *</label>
+                            <input type="text" id="expense-vendor" list="dl-expense-vendors" placeholder="e.g. Landlord / NEA / Ice Supplier" autocomplete="off" required>
+                            <datalist id="dl-expense-vendors"></datalist>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Date</label>
+                            <input type="date" id="expense-date" required>
+                        </div>
+
+                        <div class="form-group full-width">
+                            <label>Description / Notes</label>
+                            <textarea id="expense-notes" rows="2" placeholder="e.g. Monthly deep freezer power bill for Chiller 1 & 2"></textarea>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn-ghost" onclick="closeModal('expense-modal')">Cancel</button>
+                    <button type="submit" class="btn-prime" style="background:var(--accent-amber);">Save Expense Voucher</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+
+    <!-- 5. Printable Invoice / Bill Receipt Modal -->
+    <div class="modal-overlay" id="receipt-modal">
+        <div class="modal-content" style="max-width: 480px;">
+            <div class="modal-header">
+                <h3><i class="fas fa-receipt"></i> Customer Bill Receipt</h3>
+                <button class="modal-close" onclick="closeModal('receipt-modal')">&times;</button>
+            </div>
+            <div class="modal-body" id="receipt-preview-content">
+                <!-- Injected by JS -->
+            </div>
+            <div class="modal-footer">
+                <button class="btn-ghost" onclick="closeModal('receipt-modal')">Close</button>
+                <button class="btn-prime" onclick="printReceipt()"><i class="fas fa-print"></i> Print Bill Receipt</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Notification Container -->
+    <div id="toast-container"></div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.3/dist/chart.umd.min.js"></script>
+    <script src="business.js"></script>
+</body>
+
+</html>
